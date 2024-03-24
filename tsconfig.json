@@ -4,6 +4,10 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "allowImportingTsExtensions": true
-  }
+    "allowImportingTsExtensions": true,
+    "lib": [
+      "es2021"
+    ]
+  },
+  
 }
