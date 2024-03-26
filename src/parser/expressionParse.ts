@@ -12,7 +12,6 @@ export namespace ExpressionParser {
         let operatorStack: Stack<string> = new Stack<string>()
 
         for(let i: number = 0; i < expression.length; i++) {
-
             if(expression[i].match('\\(')) {
                 operatorStack.push(expression[i])
             }
@@ -48,9 +47,50 @@ export namespace ExpressionParser {
         return parsedExpression
     }
 
-    export function transpile(expression: Stack<string>): string {
+    export function transpile(className: string, expression: Stack<string>): string {
         let transpiled: string = ''
+        let reversedExpression: Stack<string> = reverseExpression(expression)
+        let operand: Stack<string> = new Stack<string>()
 
+        while(reversedExpression.top) {
+            let operand1: string
+            let operand2: string
+            
+            switch(reversedExpression.top.value) {
+                case '+':
+                    [operand1, operand2] = [operand.pop(), operand.pop()]
+                    transpiled = `${className}.__add(${operand2}, ${operand1})`
+                    operand.push(transpiled)
+                    reversedExpression.pop()
+                    break
+                case '*':
+                    [operand1, operand2] = [operand.pop(), operand.pop()]
+                    transpiled = `${className}.__mul(${operand2}, ${operand1})`
+                    operand.push(transpiled)
+                    reversedExpression.pop()
+                    break
+                case '/':
+                    [operand1, operand2] = [operand.pop(), operand.pop()]
+                    transpiled = `${className}.__mul(${operand2}, ${operand1})`
+                    operand.push(transpiled)
+                    reversedExpression.pop()
+                    break
+                default:
+                    operand.push(reversedExpression.pop())
+                    break
+            }
+        }
+        
         return transpiled
+    }
+
+    function reverseExpression(expression: Stack<string>): Stack<string> {
+        let reversed: Stack<string> = new Stack<string>()
+
+        while(expression.top) {
+            reversed.push(expression.pop())
+        }
+
+        return reversed
     }
 }

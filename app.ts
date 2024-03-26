@@ -4,10 +4,8 @@ import Stack from '@/structures/stack/stack'
 
 let parsed: Stack<string> = ExpressionParser.expressionParse(
     ExpressionFormat.expressionBuild(
-        ExpressionFormat.expressionRewrite('(a+b/2)')
+        ExpressionFormat.expressionRewrite('(2-5*4)')
     )
 )
 
-while(parsed.top) {
-    console.log(parsed.pop())
-}
+console.log(ExpressionParser.transpile('Vector', parsed))
