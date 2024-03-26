@@ -1,4 +1,5 @@
 import Stack from '@/structures/stack/stack.ts'
+import { ExpressionFormat } from '@/formatter/expressionFormat.ts'
 
 export namespace ExpressionParser {
     const operators: object = {
@@ -82,6 +83,17 @@ export namespace ExpressionParser {
         }
         
         return transpiled
+    }
+
+    export function transpileFull(className: string, expression: string): string {
+        return transpile(
+            className,
+            expressionParse(
+                ExpressionFormat.expressionBuild(
+                    ExpressionFormat.expressionRewrite(expression)
+                )
+            )
+        )
     }
 
     function reverseExpression(expression: Stack<string>): Stack<string> {
