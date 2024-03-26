@@ -1,4 +1,4 @@
-import Stack from "@/structures/stack/stack.ts"
+import Stack from '@/structures/stack/stack.ts'
 
 export namespace ExpressionParser {
     const operators: object = {
@@ -46,5 +46,11 @@ export namespace ExpressionParser {
         }
 
         return parsedExpression
+    }
+
+    export function transpile(expression: Stack<string>): string {
+        let transpiled: string = ''
+
+        return transpiled
     }
 }

@@ -4,7 +4,7 @@ import Stack from '@/structures/stack/stack'
 
 let parsed: Stack<string> = ExpressionParser.expressionParse(
     ExpressionFormat.expressionBuild(
-        ExpressionFormat.expressionRewrite('a1+2-6')
+        ExpressionFormat.expressionRewrite('(a+b/2)')
     )
 )
 
