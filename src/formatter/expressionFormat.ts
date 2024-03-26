@@ -1,15 +1,15 @@
-export namespace Formatter {
-    export function rewrite(expression: string): string {
+export namespace ExpressionFormat {
+    export function expressionRewrite(expression: string): string {
         return expression
             .replaceAll(/(?<=[^*])(?<=\s*)(?<=\w*)-(?=[^$])/g, '+ -')
             .replaceAll(' ', '')
     }
     
-    export function build(expression: string): string[] {
+    export function expressionBuild(expression: string): string[] {
         expression = `(${expression})`
         let tempVariable: string = ''
         let generated: string[] = []
-
+        
         for(let i: number = 0; i < expression.length; i++) {
             if(expression[i].match('\\w') || expression[i].match('\\.') || expression[i].match('\\-')) {
                 tempVariable += expression[i]
@@ -25,5 +25,4 @@ export namespace Formatter {
 
         return generated
     }
-
 }
