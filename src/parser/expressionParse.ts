@@ -1,4 +1,4 @@
-import Stack from '@/structures/stack/stack.ts'
+import Stack from '@/structures/stack/Stack.ts'
 import { ExpressionFormat } from '@/formatter/expressionFormat.ts'
 
 export namespace ExpressionParser {

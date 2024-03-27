@@ -2,8 +2,8 @@ import path from 'node:path'
 
 export default (env, argv) => {
   return {
-    mode: 'development',
-    watch: true,
+    mode: 'production',
+    watch: false,
     target: 'node',
     resolve: {
       alias: {
@@ -14,7 +14,7 @@ export default (env, argv) => {
       app: path.resolve(process.cwd(), 'app.ts')
     },
     output: {
-      filename: 'transpiler.js'
+      filename: 'transpiler.cjs'
     },
     module: {
       rules: [

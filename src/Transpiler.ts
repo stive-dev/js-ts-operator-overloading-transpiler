@@ -8,11 +8,11 @@ export default class Transpiler {
         
         switch(args.length) {
             case 0:
-                throw new Error('no wrapper name and overladable class name')
+                throw new Error('no wrapper name and overladable class name and file name')
             case 1:
-                throw new Error('no overladable class name')
+                throw new Error('no overladable class name and file name')
             case 2:
-                
+                throw new Error('no file name')
             default:
                 break
         }
@@ -22,7 +22,7 @@ export default class Transpiler {
 
     public static transpile() {
         try {
-            let [wrapperName, fileName]: string[] = this.commandArgs()
+            let [wrapperName, className, fileName]: string[] = this.commandArgs()
             wrapperName = wrapperName.split('(')[0]
             const originalFile = readFileSync(fileName, 'utf-8')
             let readFile: string[] = originalFile.split('\n')
@@ -31,14 +31,9 @@ export default class Transpiler {
 
             readFile.forEach((i: string) => {
                 if(i) {
-                    try {
-                        readOriginal = i.match(`(?<=${wrapperName}\\().*(?=\\))`)[0]
-                        i = i.replace(RegExp(`${wrapperName}\\(.*\\)`), ExpressionParser.transpileFull('Vector', readOriginal))
-                        newFile += i + '\n'
-                    }catch(err) {
-                        throw new Error('wrong input file')
-                    }
-                    
+                    readOriginal = i.match(`(?<=${wrapperName}\\().*(?=\\))`)[0]
+                    i = i.replace(RegExp(`${wrapperName}\\(.*\\)`), ExpressionParser.transpileFull(className, readOriginal))
+                    newFile += i + '\n'
                 }
             })
 
@@ -48,10 +43,13 @@ export default class Transpiler {
                 case 'wrong input file':
                     console.log(err.message)
                     break
-                case 'no wrapper name and overladable class name':
+                case 'no wrapper name and overladable class name and file name':
                     console.log(err.message)
                     break
-                case 'no overladable class name':
+                case 'no overladable class name and file name':
+                    console.log(err.message)
+                    break
+                case 'no file name':
                     console.log(err.message)
                     break
             }

@@ -1,4 +1,4 @@
-import StackNode from '@/structures/stack/stack-node.ts'
+import StackNode from '@/structures/stack/StackNode.ts'
 
 export default class Stack<T> {
     private _top: StackNode<T>
