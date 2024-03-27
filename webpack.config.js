@@ -4,6 +4,7 @@ export default (env, argv) => {
   return {
     mode: 'development',
     watch: true,
+    target: 'node',
     resolve: {
       alias: {
         '@': path.resolve(process.cwd(), 'src')
