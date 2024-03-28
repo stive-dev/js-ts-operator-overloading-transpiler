@@ -67,7 +67,7 @@ export namespace ExpressionParser {
                     break
                 case '-':
                     [operand1, operand2] = [operand.pop(), operand.pop()]
-                    transpiled = `${className}.__diff(${operand2}, ${operand1})`
+                    transpiled = `${className}.__sub(${operand2}, ${operand1})`
                     operand.push(transpiled)
                     reversedExpression.pop()
                     break

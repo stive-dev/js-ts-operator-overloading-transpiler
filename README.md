@@ -14,7 +14,7 @@ javascript and typescript.
 | Operator | Overloading  |
 |----------|--------------|
 | +        | __add(a, b)  |
-| -        | __diff(a, b) |
+| -        | __sub(a, b) |
 | *        | __mul(a, b)  |
 | /        | __div(a, b)  |
 ## Installation
@@ -66,12 +66,12 @@ The output file: _index.js.
 The substraction operator. For example `v0 = v1 - v2` is different with `v0 = -v1 + v2`.
 ```js
 const result1 = __(vector1 - vector2)
-const result1 = __(-vector1 + vector2)
+const result2 = __(-vector1 + vector2)
 ```
 It is transpiled to:
 ```js
 const result1 = Vector.__sub(vector1, vector2)
-const result1 = Vector.__add(Vector.__sub(null, Vector1), vector2)
+const result2 = Vector.__add(Vector.__sub(null, Vector1), vector2)
 ```
 You can do this to differentiate them:
 ```js
