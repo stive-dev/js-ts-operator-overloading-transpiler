@@ -4,6 +4,7 @@ import { ExpressionFormat } from '@/formatter/expressionFormat.ts'
 export namespace ExpressionParser {
     const operators: object = {
         '+': 1,
+        '-': 1,
         '*': 2,
         '/': 2
     }
@@ -17,7 +18,7 @@ export namespace ExpressionParser {
                 operatorStack.push(expression[i])
             }
 
-            if(expression[i].match('[+|*|/]')) {
+            if(expression[i].match('[+|*|/|-]')) {
                 if(operatorStack.top) {
                     if(operators[operatorStack.top.value] >= operators[expression[i]]) {
                         parsedExpression.push(operatorStack.pop())
@@ -64,6 +65,12 @@ export namespace ExpressionParser {
                     operand.push(transpiled)
                     reversedExpression.pop()
                     break
+                case '-':
+                    [operand1, operand2] = [operand.pop(), operand.pop()]
+                    transpiled = `${className}.__diff(${operand2}, ${operand1})`
+                    operand.push(transpiled)
+                    reversedExpression.pop()
+                    break
                 case '*':
                     [operand1, operand2] = [operand.pop(), operand.pop()]
                     transpiled = `${className}.__mul(${operand2}, ${operand1})`
@@ -89,9 +96,7 @@ export namespace ExpressionParser {
         return transpile(
             className,
             expressionParse(
-                ExpressionFormat.expressionBuild(
-                    ExpressionFormat.expressionRewrite(expression)
-                )
+                ExpressionFormat.expressionBuild(expression)
             )
         )
     }

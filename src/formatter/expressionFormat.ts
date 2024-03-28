@@ -11,14 +11,14 @@ export namespace ExpressionFormat {
         let generated: string[] = []
         
         for(let i: number = 0; i < expression.length; i++) {
-            if(expression[i].match('\\w') || expression[i].match('\\.') || expression[i].match('\\-')) {
+            if(expression[i].match('\\w') || expression[i].match('\\.')) {
                 tempVariable += expression[i]
             }else if(tempVariable.length != 0) {
                 generated.push(tempVariable)
                 tempVariable = ''
             }
 
-            if(expression[i].match(/[+|*|/|\\(|\\)]/g)) {
+            if(expression[i].match(/[+|*|\-|/|\\(|\\)]/g)) {
                 generated.push(expression[i])
             }
         }

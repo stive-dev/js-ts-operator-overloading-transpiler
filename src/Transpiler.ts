@@ -31,12 +31,13 @@ export default class Transpiler {
 
             readFile.forEach((i: string) => {
                 if(i) {
-                    readOriginal = i.match(`(?<=${wrapperName}\\().*(?=\\))`)[0]
-                    i = i.replace(RegExp(`${wrapperName}\\(.*\\)`), ExpressionParser.transpileFull(className, readOriginal))
+                    try {
+                        readOriginal = i.match(`(?<=${wrapperName}\\().*(?=\\))`)[0]
+                        i = i.replace(RegExp(`${wrapperName}\\(.*(?<!\\){2,})`), ExpressionParser.transpileFull(className, readOriginal))
+                    }catch(err) {}
                     newFile += i + '\n'
                 }
             })
-
             writeFileSync('_' + basename(fileName), newFile)
         }catch(err) {
             switch(err.message) {
