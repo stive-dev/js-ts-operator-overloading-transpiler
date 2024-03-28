@@ -52,7 +52,7 @@ And then in your shell run:
 shell>dist/transpiler.cjs {wrapper} {className} {file}
 ```
 - wrapper. It is your wrapper function.
-- className. It iss your class with the overloaded methods.
+- className. It is your class with the overloaded methods.
 - file. It is your file with overloads.
 ```bash
 shell>dist/transpiler.cjs __() Vector index.js
@@ -61,6 +61,7 @@ Then it is transpiled to:
 ```js
 const result = Vector.__add(vector1, vector2) // wrapper = __()
 ```
+The output file: _index.js.
 ### Substraction operator
 The substraction operator. For example `v0 = v1 - v2` is different with `v0 = -v1 + v2`.
 ```js
