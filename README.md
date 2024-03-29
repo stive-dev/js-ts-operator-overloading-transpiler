@@ -18,7 +18,7 @@ javascript and typescript.
 | *        | __mul(a, b)  |
 | /        | __div(a, b)  |
 ## Installation
-To install just downoad or clone the repository, then run `npm install` to install 
+To install just download or clone the repository, then run `npm install` to install 
 the dependencies and finally run `npm run build` to build the transpiler.
 ## Syntax
 To overload an operator you have to create a class with the static methods that you want to overload.
