@@ -55,6 +55,7 @@ export namespace ExpressionParser {
         let operand: Stack<string> = new Stack<string>()
 
         while(reversedExpression.top) {
+            console.log(reversedExpression.top.value)
             let operand1: string
             let operand2: string
             
@@ -67,9 +68,15 @@ export namespace ExpressionParser {
                     break
                 case '-':
                     [operand1, operand2] = [operand.pop(), operand.pop()]
-                    transpiled = `${className}.__sub(${operand2}, ${operand1})`
-                    operand.push(transpiled)
-                    reversedExpression.pop()
+                    if(operand2 == null) {
+                        transpiled = `${className}.__sub(${operand2}, ${operand1})`
+                        reversedExpression.pop()
+                        reversedExpression.push(transpiled)
+                    }else {
+                        transpiled = `${className}.__sub(${operand2}, ${operand1})`
+                        operand.push(transpiled)
+                        reversedExpression.pop()
+                    }
                     break
                 case '*':
                     [operand1, operand2] = [operand.pop(), operand.pop()]
